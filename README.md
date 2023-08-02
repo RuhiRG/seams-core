@@ -81,15 +81,16 @@ installation method that currently works
 ```bash
 mkdir bbdir
 meson setup bbdir --prefix $CONDA_PREFIX -Dwith_lua=True
-meson compile -j$(nproc) -C bbdir 
-#you can test it by running the example
+meson compile -j$(nproc) -C bbdir
+meson install -C bbdir
+# you can test it by running the example
 yodaStruct -c lua_inputs/config.yml 
 ```
 
 
 this is currently not working 
 ```bash
-
+mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=YES -DCMAKE_INSTALL_PREFIX:PATH=$CONDA_PREFIX ../
 make -j$(nproc)
