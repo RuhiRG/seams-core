@@ -76,6 +76,7 @@ ydsl_sources = [
   'src/backward.cpp',
   'src/bond.cpp',
   'src/bop.cpp',
+  'src/selection.cpp',
   'src/bulkTUM.cpp',
   'src/cluster.cpp',
   'src/franzblau.cpp',
@@ -111,15 +112,14 @@ if (not meson.is_subproject())
     if get_option('with_lua')
       lua_dep = dependency('lua',
                            version : '5.4.6',
-                           required : false)
+                           required : true)
       if lua_dep.found()
         _deps += [ lua_dep ]
       endif
-      if (not lua_dep.found())
         message('Trying with subproject lua, but luafilesystem might be problematic')
-        subproject('lua')
+        #subproject('lua')
         lua_dep = dependency('lua',
-                             version : '5.4.4',
+                             version : '5.4.6',
                              required : false)
         if lua_dep.found()
           _deps += [ lua_dep ]
@@ -135,10 +135,10 @@ if (not meson.is_subproject())
       # Build the executable
       yds = executable('yodaStruct',
                        ['src/main.cpp'],
-                       link_with : _linkto,
+                       link_with : [_linkto, ydslib],
                        dependencies: _deps,
                        cpp_args : _args,
                        include_directories : incdir,
                        install : true)
     endif
-endif
+

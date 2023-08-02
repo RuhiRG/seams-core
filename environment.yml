@@ -17,9 +17,9 @@ dependencies:
   - cmake
   - meson
   - cmake
-  # - lua-luafilesystem
+  - lua-luafilesystem
   - luarocks
   # Pinned
   - fmt==9.0.0
-  - eigen==3.3.9
-  - lua==5.4.4
+  - eigen==3.4.0
+  - lua==5.4.6
