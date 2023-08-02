@@ -76,8 +76,20 @@ Now the installation can proceed.
 
 \note we do not install `lua-luafilesystem` within the `conda` environment because it is outdated on `osx`
 
+installation method that currently works
+
 ```bash
-mkdir build
+mkdir bbdir
+meson setup bbdir --prefix $CONDA_PREFIX -Dwith_lua=True
+meson compile -j$(nproc) -C bbdir 
+#you can test it by running the example
+yodaStruct -c lua_inputs/config.yml 
+```
+
+
+this is currently not working 
+```bash
+
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=YES -DCMAKE_INSTALL_PREFIX:PATH=$CONDA_PREFIX ../
 make -j$(nproc)
